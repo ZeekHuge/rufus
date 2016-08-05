@@ -4,9 +4,21 @@ os: Visual Studio 2015
 
 environment:
   global:
-    PLATFORMTOOLSET: "v140"
+    PLATFORMTOOLSET: v140
     BITS: 32
   matrix:
+    - CONFIGURATION: Debug
+      COMPILER: MSVC15
+      PLATFORM: x86_32
+    - CONFIGURATION: Debug
+      COMPILER: MSVC15
+      PLATFORM: x86_64
+    - CONFIGURATION: Release
+      COMPILER: MSVC15
+      PLATFORM: x86_32
+    - CONFIGURATION: Release
+      COMPILER: MSVC15
+      PLATFORM: x86_64
     - CONFIGURATION: Release
       COMPILER: MinGW
       PLATFORM: i686
