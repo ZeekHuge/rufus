@@ -16,6 +16,7 @@ build:
   verbosity: detailed
 
 install:
+- if [%COMPILER%]==[MinGW] set "PATH=C:\msys64\usr\bin;%PATH%"
 - if [%COMPILER%]==[MinGW] xcopy /S C:\projects\rufus C:\msys64\home\appveyor\
 - if [%COMPILER%]==[MinGW] C:\msys64\usr\bin\bash -lc "pacman --noconfirm --needed -S base-devel mingw-w64-%PLATFORM%-toolchain"
 
