@@ -6,18 +6,6 @@ environment:
   global:
     PLATFORMTOOLSET: "v140"
   matrix:
-    - CONFIGURATION: Debug
-      COMPILER: MSVC15
-      PLATFORM: x86_32
-    - CONFIGURATION: Debug
-      COMPILER: MSVC15
-      PLATFORM: x86_64
-    - CONFIGURATION: Release
-      COMPILER: MSVC15
-      PLATFORM: x86_64
-    - CONFIGURATION: Release
-      COMPILER: MSVC15
-      PLATFORM: x86_32
     - CONFIGURATION: Release
       COMPILER: MinGW
       PLATFORM: i686
@@ -26,6 +14,9 @@ build:
   project: rufus.sln
   parallel: true
   verbosity: detailed
+
+install:
+- if [%COMPILER%]==[MinGW] xcopy /S C:\projects\rufus C:\msys64\home\appveyor\
 
 build_script:
 - if [%COMPILER%]==[MSVC15] msbuild rufus.sln /m /p:Configuration=%CONFIGURATION%,Platform=%PLATFORM% /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
