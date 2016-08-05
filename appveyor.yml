@@ -16,10 +16,10 @@ build:
   verbosity: detailed
 
 install:
-- if [%COMPILER%]==[MinGW] set "PATH=C:\msys64\usr\bin;%PATH%"
+- if [%COMPILER%]==[MinGW] set "PATH=C:\msys64\bin;%PATH%"
 - if [%COMPILER%]==[MinGW] xcopy /S C:\projects\rufus C:\msys64\home\appveyor\
 - if [%COMPILER%]==[MinGW] C:\msys64\usr\bin\bash -lc "pacman --noconfirm --needed -S base-devel mingw-w64-%PLATFORM%-toolchain"
 
 build_script:
 - if [%COMPILER%]==[MSVC15] msbuild rufus.sln /m /p:Configuration=%CONFIGURATION%,Platform=%PLATFORM% /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
-- if [%COMPILER%]==[MinGW] C:\msys64\usr\bin\bash -lc "./configure --build=mingw-w64-%PLATFORM% --host=mingw-w64-%PLATFORM% --disable-debug; mingw-w64-%PLATFORM%-gcc -dM -E -x c /dev/null; make -j4"
+- if [%COMPILER%]==[MinGW] C:\msys64\usr\bin\bash -lc "./configure --build=%PLATFORM%-w64-mingw32 --host=%PLATFORM%-w64-mingw32 --disable-debug; %PLATFORM%-w64-mingw32-gcc -dM -E -x c /dev/null; make -j4"
